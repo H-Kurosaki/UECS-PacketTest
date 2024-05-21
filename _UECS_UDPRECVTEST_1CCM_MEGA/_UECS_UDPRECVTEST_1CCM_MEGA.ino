@@ -9,9 +9,9 @@
 これを検出するとLEDを点灯して通知します。
 */
 
-#include <Uardecs_pico.h>
-#define DOUT_LED_RECV   2
-#define DOUT_LED_LOSS   4
+#include <Uardecs_mega.h>
+#define DOUT_LED_RECV   A1
+#define DOUT_LED_LOSS   A2
 
 
 /*
@@ -106,12 +106,12 @@ const char PROGMEM ccmType1[] = "test00000000000.xXX";
 const char PROGMEM ccmUnit1[] = "";
 
 void UserInit(){
-U_orgAttribute.mac[0] = 0x11;
-U_orgAttribute.mac[1] = 0x11;
-U_orgAttribute.mac[2] = 0x22;
-U_orgAttribute.mac[3] = 0x22;
-U_orgAttribute.mac[4] = 0x33;
-U_orgAttribute.mac[5] = 0x33;
+U_orgAttribute.mac[0] = 0x14;
+U_orgAttribute.mac[1] = 0x24;
+U_orgAttribute.mac[2] = 0x35;
+U_orgAttribute.mac[3] = 0x45;
+U_orgAttribute.mac[4] = 0x56;
+U_orgAttribute.mac[5] = 0x66;
 UECSsetCCM(false, CCMID_test1      , ccmName1, ccmType1,ccmUnit1, 30, 0, A_1S_0);
 }
 
@@ -202,4 +202,3 @@ digitalWrite(DOUT_LED_RECV,LOW);
 
 UECSsetup();
 }
-

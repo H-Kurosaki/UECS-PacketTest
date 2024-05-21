@@ -39,11 +39,12 @@ void EthernetSetup()
 }
 
 void loop(){
-  static unsigned long wait=600;
+  static unsigned long wait=3000;
   static unsigned long lastms=millis()/1000;
 
 
   static unsigned long count=0;
+  static unsigned long countps=0;
 
   UECS_UDP16520.beginPacket(sendip, 16520);
   UECS_UDP16520.write("<?xml version=\"1.0\"?><UECS ver=\"1.00-E10\"><DATA type=\"test00000000000.xXX\" room=\"1\" region=\"1\" order=\"1\" priority=\"30\">");
@@ -54,16 +55,19 @@ void loop(){
 
   UECS_UDP16520.endPacket();
   count++;
+  countps++;
   delayMicroseconds(wait);
   
   if(lastms!=millis()/1000)
     {
       lastms=millis()/1000;
-      if(lastms%5==0&& wait>0)
+      if(lastms%2==0&& wait>0)
         {
-          wait-=5;
-          Serial.println(wait);
+          wait-=100;
         }
+      Serial.print(countps);
+      Serial.println("packets/sec");
+      countps=0;
     }
 
 
