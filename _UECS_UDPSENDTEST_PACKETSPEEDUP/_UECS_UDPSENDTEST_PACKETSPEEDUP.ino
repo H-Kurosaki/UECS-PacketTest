@@ -61,10 +61,7 @@ void loop(){
   if(lastms!=millis()/1000)
     {
       lastms=millis()/1000;
-      if(lastms%2==0&& wait>0)
-        {
-          wait-=100;
-        }
+      wait=wait-wait/15;
       Serial.print(countps);
       Serial.println("packets/sec");
       countps=0;
@@ -78,7 +75,12 @@ void loop(){
 
 
 void setup(){
-delay(5000);
 Serial.begin(9600);
+for(int i=0;i<21;i++)
+  {
+    Serial.print("countdown");
+    Serial.println(20-i);
+    delay(1000);
+    }
  EthernetSetup();
 }

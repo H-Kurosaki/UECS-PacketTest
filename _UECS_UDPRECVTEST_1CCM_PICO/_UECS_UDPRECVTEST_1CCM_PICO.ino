@@ -41,7 +41,7 @@
 //ピンIDを入力、このピンは自動的にプルアップされます
 //ピンIDは変更可能です
 const byte U_InitPin = 3;
-const byte U_InitPin_Sense=HIGH;//ソフトウェア上でSafeModeを抜けたい場合はLOWにしてください
+const byte U_InitPin_Sense=LOW;//ソフトウェア上でSafeModeを抜けたい場合はLOWにしてください
 
 //When U_InitPin status equals this value,IP address is set "192.168.1.7".
 //U_InitPinに指定したピンがこの値になった時、IPアドレスが"192.168.1.7"に初期化されます。
@@ -192,6 +192,10 @@ UECSloop();
 //必要に応じて処理を記述してもかまわない。
 //---------------------------------------------------------
 void setup(){
+pinMode(20, OUTPUT);//W5500 Reset
+digitalWrite(20,LOW);
+delay(100);
+digitalWrite(20,HIGH);
 
 pinMode(DOUT_LED_LOSS, OUTPUT);//LED
 digitalWrite(DOUT_LED_LOSS,LOW);
@@ -202,4 +206,3 @@ digitalWrite(DOUT_LED_RECV,LOW);
 
 UECSsetup();
 }
-
